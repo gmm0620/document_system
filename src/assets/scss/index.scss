@@ -1,0 +1,7 @@
+@import './reset.scss';
+@import './mixin.scss';
+@import './else.scss';
+
+@function vw($px) {
+    @return ( $px / 1920) * 100vw
+}

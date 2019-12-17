@@ -1,0 +1,512 @@
+/* Polyfill dialog */
+
+dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    /*fix bug in edge/ie to center the dialog*/
+    top: 30%;
+    margin: auto;
+    padding: 30px 35px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .05);
+    background: white;
+    color: black;
+    width: -moz-fit-content;
+    display: none;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+dialog[open] {
+    display: block;
+}
+
+dialog[closed] {
+    display: none;
+}
+
+.dynamsoft-major-color {
+    color: #50a8e1;
+}
+
+.dynamsoft-backdrop {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.1);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -99999999;
+}
+
+/* progress bar */
+
+.dynamsoft-finalMessage {
+    margin: 0 0 15px 0;
+    color: #3a3a3a;
+    font: 22px/26px Arial, sans-serif;
+}
+
+.dynamsoft-status {
+    color: #555;
+    font: 14px/22px Arial, sans-serif;
+    margin-bottom: 5px;
+}
+
+.dynamsoft-progressBar {
+    -webkit-appearance: none;
+    width: 300px;
+    margin-bottom: 20px;
+    height: 14px;
+    background-color: #e7e7e7;
+    border-radius: 7px;
+}
+
+.dynamsoft-progressBar::-webkit-progress-bar {
+    border-radius: 7px;
+    background-color: #e7e7e7;
+}
+
+.dynamsoft-progressBar::-webkit-progress-value {
+    background-color: #50a8e1;
+    border-radius: 7px;
+}
+
+.dynamsoft-progressBar::-moz-progress-bar {
+    background-color: #50a8e1;
+    border-radius: 7px;
+}
+
+.dynamsoft-btnCancel {
+    color: #999;
+    font: 14px/22px Arial, sans-serif;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 2px 8px;
+    min-width: 75px;
+    cursor: pointer;
+}
+
+.dynamsoft-btnCancel:focus {
+    outline: none;
+}
+
+.dynamsoft-btnCancel:hover {
+    color: #555;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+/* Image Editor */
+
+.dynamsoft-dwt-noPadding {
+    padding: 0;
+}
+
+.dynamsoft-dwt-noPaddingnoMarginInside>div {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.dynamsoft-dwt-thinborder {
+    border: solid 1px #AAAAAA;
+}
+
+.dynamsoft-dwt-notdisplayed {
+    display: none;
+}
+
+.dynamsoft-dwt-container-box {
+    background-color: white;
+}
+
+/* toolbar */
+
+.dynamsoft-dwt-viewerToolbar {
+    background-color: lightgray;
+}
+
+.dynamsoft-dwt-viewerToolbar>ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dynamsoft-dwt-viewerToolbar>ul>li {
+    padding: 0 0 0 2px;
+    margin: 0;
+    float: left;
+    z-index: 1;
+}
+
+.dynamsoft-dwt-viewerToolbar img {
+    cursor: pointer;
+}
+
+.dynamsoft-dwt-imgTag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    padding-top: 2px;
+    text-align: center;
+    z-index: 1;
+}
+
+.dynamsoft-dwt-imgTag_Normal {
+    color: black;
+    border: 1px solid #CCCCCC;
+    background-color: white;
+    z-index: 1;
+}
+
+.dynamsoft-dwt-imgTag_Selected {
+    color: #FFFFFF;
+    background-color: #7DA2CE;
+    border: 1px solid #7DA2CE;
+    z-index: 1;
+}
+
+/* image change size */
+
+.dynamsoft-dwt-imgSizeEditor {
+    position: absolute;
+    text-align: left;
+    padding: 0 0 0 15px;
+    margin: 0;
+    height: 150px;
+    width: 315px;
+    font-size: 12px;
+    border: 3px solid #cE5E04;
+    border-collapse: collapse;
+    background-color: #f0f0f0;
+    z-index: 9999;
+}
+
+.dynamsoft-dwt-imgSizeEditor ul {
+    padding: 15px 0 0 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dynamsoft-dwt-imgSizeEditor div {
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.dynamsoft-dwt-imgSizeEditor span {
+    margin: 0 0 0 10px;
+}
+
+.dynamsoft-dwt-imgSizeEditor input, .dynamsoft-dwt-imgSizeEditor select {
+    font-size: 12px;
+}
+
+.dynamsoft-dwt-EditorButton-selected {
+    border: 1px solid #777;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    background-color: #BBB;
+}
+
+.dynamsoft-dwt-dlg {
+    padding: 15px;
+}
+
+.dynamsoft-dwt-dlg-header {
+    padding: 15px 15px 5px 5px;
+    height: 40px;
+    position: relative;
+}
+
+.dynamsoft-dwt-dlg-title {
+    text-align: center;
+    height: 20px;
+    font-size: 20px;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: rgba(68, 68, 68, 1);
+    line-height: 36px;
+}
+
+.dynamsoft-dwt-dlg-error {
+    text-align: center;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 15px;
+}
+
+.dynamsoft-dwt-dlg-tips {
+    font-family: "Helvetica", "Arial", "sans-serif";
+    text-align: center;
+    color: #606060;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.dynamsoft-dwt-dlg-errorIcon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NUE2NTI3QTZDREJCMTFFN0I5QzRGMjk2QjIzMDhBMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTUyMzI2Q0NDREJGMTFFN0I5QzRGMjk2QjIzMDhBMjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1QTY1MjdBNENEQkIxMUU3QjlDNEYyOTZCMjMwOEEyMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1QTY1MjdBNUNEQkIxMUU3QjlDNEYyOTZCMjMwOEEyMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pja+KokAAAoESURBVHja7J17cFTlFcDPvXsTQkJSDRAIeUKiklADVoUBGWtToIzITH0x6IBDVfyjpdPSaS3a2j9aa1vr1HHkj/oIZcRHm06rM6CoPFQGdYi0GgpYbIJuHjxCQJuQkNfu7Tn3frtdkt39zt39bvbujmfmTNjw3d3v/PI9zjnfY7We3vOQQpmCehXqFaizxc8S1MmouaiTUIdQqZJfiJ9dqMdQ/y1+fojanSoDtHEGSFC+iVqP+g3UOqpDku9poh5CfQt1L+oe1P5MAqijLkVdh7oSNc/lz+tD3Y66FXUXajBdAVL3uxf1B6iVKephn6E+gfqs6P5pAXAi6gbU+8UY5wWhMfL3qE+iXvAywNWov0MtB29KG+pPUf+scnxSIRWoO1Ff8jA8EHWjOr4u6uwJgGvELLgc0ke+Jeq8JpUAc1AbULehFkD6SYGo+xZhy7iOgUWor6AuTNqMwQsQ9B8D83Q7mGdPgdl9EufLL8C8gK7c8KBdJmsCaDnoQuZfAtqUYtAmTwdtWhnoFeh3T5ioAub7qN8WTrrrAGcK/6oqYc/38y4IHnofgi2HwDyBnoaZoKum6aDNqAS9ug70uoWgXVqUDMRW4a9+6ibAGtTdqDOcUwtC8EgTBD7YC2Z7iwgglDoUoJVVg+/aetDnzLfgJiAnUJegfuwGwGoRLpU6BvfRfgi8+yqY57rGZXDTCovAd90K0OctTgRkhwgzW1QCnIr6noDIZ9d5HEZeew7Mk/7UBPrFFWDceBdoJbOcPkrwFqGeUQEwG3Uf6gL2x48MQWBXIwQOYmxvmpBS0TTwXVMPvqWrAIxsJ08eQP06TXPJAqQ48h52q8OZdOSvm8Hs6vSUz6IVlYBx+wZrBncgDSKeTxjgGuErsST46VEYadxsuSaeFHSFjNu/B/rMWidPrUV9PhGAFcJbZznJwaMfwMjLTwMERrztPvsMMG6+D/Taa7lP9ICdt/Q7jUSecgTvb3/0PjwSrCPVlersIGJ5ymkot1rEi4xu+7Hd8swgpI1gXanOVHcHsfMdXIC5IiXFmzAan0yPlhetJWLdyQam/FawkQLcwEpJoatCs61nJwxmHG7ZMDzEKV0u2MQFSGn4n7BcvTf/4jlXJaHejDYEdjdyi98vGMUE+B1gpOFN/zEIHnwLMkXI4Tc7WjlFJwtGUQHSvzfKZw0cgHducyEZkMpmaGLIuY07Ef4oklskwKUiVRWfX/P+jOi6Yxie8qNt73KKVqIuiwZwHaf1Bfa/Cpkqgf07LBsZsm40QJqeV0r5HTlgJUMzVSjdFjzaxCl6E4gNAiGAy4CxYyDQtBsyXQIHdnGK5YkhLwxQuqJmnjlh5fcyXchG8wxrjF8eCbCe033dEKO4AvLXbAQtawL7GS1nIhTc/QAYZdWu1ImWHhhSHwJIKzGXSd+09bB6eDMqoeC+X0B23ULIv3sTCyKtzhXc8yBkzb4KCtb/HIzyy9QD5NlKH1xEAL8mLTrQb6+eqYa3/iHQ8vKt11lVc6QQbXjY8mg5M/T63p8ph2jZOsDaIXc1AZwn/Yu0/Ud5tiV3xdowvJDEgxhqeSF4kb/PXXKb8myNZbNc5hJA6UBinm5T3k16X3gcRjrHLsFaELGVRUIMt7SKy8fG5BhW9r74hPrJhGdztc6JPqzdAqor2H8eep75VXSIs2oR4oMWxHjdlOD1NDwC5oD6DalMm2cRQOkiuXnutDsuA0F8+pcxINZYEOXw3EmnMW0uJoCF0mI9n7vnd13osyF2HI8KMSq8z9yF58DmQgIo3Z1jupw0tSBSd+6QO+oWvC0uw7NsZg0LuQQwX1psaMD9CIABcVxaXtjmQU6pSQRwCLwi1i4GM85/B8dvp4PPYBUjgL3SUtk5rtdXm5iHUclDYJTG3jWXNbMGJxWcncehPkybz7MAamo2McaHR2FZqXzLoVE524bodp0msAD281pgwaUuw4ve8oZpzTnKWoUFkZxtNyHmsfYUnCOA8i1chdNchjcrKrzeht+gi4MTS3ssiO61RKbNpwigdEsr7UtOBTwTZ3+KMqzZub0lCsQrbIg56iEybW4lgNKdmNo09Uc/KAcYG94jFrzw7GtBfDgmxPw7f6geIM/mFgL4kXSqpmhA05VWsP+1F6xQ7iJ4x0PwxvpgYYijsiT0+/49f1dMT7dtlsshovJPaTEM6Gk3vEqh+Je6ptnf+394W6LDuwjis78OQ7ReY1enuFgpP7I1J5dT9CAB7OJ0Y736SuXdxIb4MAwdborZ8mJBHP6k2YpKVMOzbK1i2Up/xa5Qv9wrfdMrac+15grE3uceA3N4kP1MuCX6P3Fj/gW9bhGn4N5QJEKyUz6tF4FWVgWZLmQj2cqQ1yMB0mJonzQ8vKY+4wEybewTzMIA6Rc7pN14zoJkj1N5u/VhyyMbGbIj1OAifZOt8tFVB9/iFZnb+hbfZNnIkK2R2ZiQvAn2HQPxGc5bDNr08sxrfWiTPvc6TlG/YDUGIK1b/oHjZNLxKToBlDn0NGETq/U9DhE3gYx+4k+oZ6WfV1qVURMK2aKVsjwMYtNwUY8cVYBiq0dZH7pkFWhTZ2RA160A37LV3OKPwqjrU6K12c1g324RX7KywVj1fVUnxlMjWHfjtu9y0/dtgg3IANJy1CbWX2/ydBsic/3AW/3WsOrOdJpJHoAoV0rFGjXpapA3WHHjzBowbl6vPFvjbr/VrTpT3ZlCs+6LUd8qzmFDSr80A/e83JEmGHnlmTQ5bIjwaudzn6DDhrQBK2riOV6zIZ9wAzuDMWc+GHds9PaYSGMe1tEBPBAMYmbt3Tlw3biZu012/Hrt1BIc8xwfuN4is50DkPaZvQNOjvwPD1nHpzx15B/dLvIcHAjtab4BdSBZgCSJXTrR0WqdAKJDLKny8Ywb13Kd5EhReulESAje22Bf0cmXIF17sg8C+7aD2XNufMAVFILv+pUYt1/PTQ5ESqdoeUqvPQlJjXBvyhxbhbNz8PABCPzjbXGwT33X1kqrwXf1DaB/dUGivmk72IerXbl4JyQEj7KxtYkaal391PweBFuawTzZltzVT8XloFfPBX3uomRzlUfBPvvR7qgKCV4+Rpsyt4txIjkZ6LcvHzvpB7O7E+F2A/T9N/rlY5O+gpCmgDalxLpUx7p8jLd6JhMa3+mom+MxJpkbLGl2fsyJr+hRofj2xyC5YCem/5vEB9MHYiAMt4B9x3O6CdX5VmHDYKJvoiKAfVmEOm+kETyqK10AnvSWBlUZAL8YgO8ETiosddIm6rgcGMsX4wkwMotDV7rTTbndHgJHddkk6vaSUtfJxYu480Uc6YWLuCkN3+vGB3x5FXwaAIyU0JcRkNItkbSLR8WXEfwL7Ns190AGfhmBLElBs+HlMPbrMPIiWmuf0LMiVg19HQbtLvqQE/S7Jf8TYAA228oDMYgKogAAAABJRU5ErkJggg==) no-repeat;
+}
+
+.dynamsoft-dwt-dlg-tail {
+    text-align: center;
+    color: #AAAAAA;
+    background-color: #F4F6F7;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    font-size: 14px;
+    line-height: 24px;
+    padding: 15px;
+}
+
+.dynamsoft-dwt-dlg-red {
+    color: #CC5A4A;
+    margin: 5px 0;
+}
+
+.dynamsoft-dwt-dlg-center {
+    text-align: center;
+}
+
+.dynamsoft-dwt-dlg-button {
+    margin: 20px auto;
+    cursor: pointer;
+    text-align: center;
+    width: 117px;
+    background: #FE8E14;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #FFFFFF;
+    line-height: 36px;
+}
+
+.dynamsoft-dwt-dlg-button:hover {
+    background-color: #FFAE37;
+}
+
+.dynamsoft-dwt-dialogProgress {
+    width: 300px
+}
+
+/* dialog/mask body */
+
+.dynamsoft-dialog {
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #444444;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 auto;
+    padding: 5px;
+    width: 392px;
+    border: 1px solid #e7e7e7;
+    background-color: #F1F2F2;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+.dlg-license-wrap {
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #606060;
+    font-size: 14px;
+    line-height: 23px;
+    width: 510px;
+    height: 272px;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+.dynamsoft-dialog-license .dynamsoft-dialog-close {
+    margin: 15px;
+    width: 16px;
+    height: 16px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqElEQVQ4jY3RsQ3CMBBA0ceJKiNAzTSwAbRhhQxDCyPANGnDCLTQOBKy7MQu7bwvO7cZhqHDGU+8ta0djnhEwgdc00ELviZzCbzwQdcQmXGXzDMw4dYQyfENU6TDtUgRQ/x9VIrslzBss2vOkT6BPu0XcX6D2k2quBaAb+NeMZC/eXE6eaD0wxZHHCt4sjLiWMHzqkaiAS9F9oFTA65FjoE7xgacR0bcf5DfTZ6fKnj6AAAAAElFTkSuQmCC) no-repeat;
+}
+
+.ds_license_header {
+    color: #333333;
+    font-size: 20px;
+    padding: 40px 15px 15px 15px;
+    text-align: center;
+}
+
+.ds_license_l1 {
+    margin: 0 45px 20px 45px;
+    padding: 0;
+}
+
+.ds_license_l2 {
+    color: #777777;
+    padding: 23px 30px;
+    height: 110px;
+    background-color: #F8F8F8;
+    text-align: center;
+}
+
+.dynamsoft-dialog2 {
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: #444444;
+    font-size: 14px;
+    line-height: 24px;
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    border: 0;
+    padding: 0;
+    width: auto;
+}
+
+.dynamsoft-dialog a {
+    text-decoration: none
+}
+
+.dynamsoft-dialog ul {
+    margin: 10px 0 10px 20px;
+    padding-left: 10px;
+    list-style-type: disc
+}
+
+.dynamsoft-dialog-wrap {
+    position: fixed;
+    left: 0;
+    top: 20%;
+    width: 90%;
+}
+
+.dynamsoft-dialog-close {
+    float: right;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTUyMzI2RDNDREJGMTFFN0I5QzRGMjk2QjIzMDhBMjAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTUyMzI2RDRDREJGMTFFN0I5QzRGMjk2QjIzMDhBMjAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NTIzMjZEMUNEQkYxMUU3QjlDNEYyOTZCMjMwOEEyMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NTIzMjZEMkNEQkYxMUU3QjlDNEYyOTZCMjMwOEEyMCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuW+RZ4AAADASURBVHjafJJdCsIwEIQ3TfBOvnkQf1pN0SMJgr9vPYVPPZSQ1lmYyBKrga8byEx2tq3ruq4RkTk4gEGmVwWOoA94LMAaeNBOmFR8AlswC9xUrA5EY/IUa4oH2KkhgRqMPBB2kkKsNQUeJCPO1fGiO7urRoLJmk22001jZHEeqFyj/Fm2gw545hu7MtKG9SuSii9gxdqabjVNn6E9b1wacc4ci5mawBhZHIsPl0w3NQ1qeIIX2P/4NRIv0tq/BRgAFzc2Awl1/rQAAAAASUVORK5CYII=) no-repeat;
+    /*display: inline-block;*/
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.dynamsoft-dwt-overlay {
+    position: absolute;
+    z-index: 1000;
+}
+
+/* old dialog styles */
+
+.dynamsoft-dialog-body {
+    margin: 0;
+    padding: 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #E7E7E7;
+}
+
+.dynamsoft-dwt-box-title {
+    color: #333333;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    font-size: 16px;
+    font-weight: bold;
+    clear: both
+}
+
+.dynamsoft-dwt-red {
+    color: red;
+    margin-left: 5px
+}
+
+.dynamsoft-dwt-installdlg-splitline {
+    width: 120px;
+    height: 1px;
+    background: rgba(238, 238, 238, 1);
+    position: relative;
+    top: 16px;
+}
+
+.dynamsoft-dwt-installdlg-iconholder {
+    margin: 40px 10px 10px 10px;
+    text-align: center;
+}
+
+.dynamsoft-dwt-installdlg-text {
+    position: relative;
+    height: 11px;
+    font-size: 14px;
+    font-family: "Helvetica", "Arial", "sans-serif";
+    color: rgba(119, 119, 119, 1);
+    line-height: 36px;
+}
+
+#dwt-install-url-div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ds-dwt_dragdrop_helper {
+    background-color: rgb(251, 236, 136);
+}
+
+.dynamsoft-dialog-selectsource {
+    font-size: 14px;
+    background-color: #eeeeee;
+    border: 2px solid #777777;
+    border-left: 2px solid #dddddd;
+    border-top: 2px solid #dddddd;
+    padding: 15px 20px 0px 20px;
+    max-width: 300px;
+}
+
+.dynamsoft-dialog-selectsource p {
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+#dynamsoft-dialog-selectsource-sourcelist {
+    height: 60px;
+    padding: 0px;
+    background-color: #ffffff;
+    border: 2px solid #777777;
+    border-right: 2px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width: 240px;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+	supported by Chrome and Opera */
+}
+
+#dynamsoft-dialog-selectsource-sourcelist li {
+    cursor: pointer;
+    line-height: 15px;
+}
+
+#dynamsoft-dialog-selectsource-sourcelist li:hover {
+    background-color: rgb(239, 246, 253);
+}
+
+#dynamsoft-dialog-selectsource-sourcelist li.dynamsoft-dialog-selectsource-sourcelist-li-selected {
+    background-color: rgb(199, 222, 252);
+}
+
+#dynamsoft-dialog-selectsource-sourcelist-ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#dynamsoft-dialog-selectsource-buttons>input {
+    min-width: 80px;
+    height: 20px;
+    margin: 10px 10px 20px 0px;
+    line-height: 0;
+}
