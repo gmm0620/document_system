@@ -25,13 +25,19 @@
                 </div>
                 <div>
                    <div class="right">
-                      <div class="con_4" id="loopDiv">
-                        <el-carousel indicator-position="outside" arrow="always" :autoplay="false">
-                          <el-carousel-item v-for="(item, index) in imgList" :key="index">
+                      <div class="con_4" id="loopDiv" style="width:800px;height:500px;">
+                        <!-- <el-carousel indicator-position="outside" arrow="always" :autoplay="false">
+                          <el-carousel-item v-for="(item, index) in imgList" :key="index"> -->
                               <!-- <img :src="'http://develop.gangwaninfo.com:9999' + item.敏感图片" alt="" style="width: 100%; height: 100%;"  v-watermark="{text: userInfo['用户名'] + '' + nowDate,textColor:'rgba(225, 225, 225, 1)'}" /> -->
-                              <img :src="item.敏感图片 ? 'http://develop.gangwaninfo.com:9999' + item.敏感图片 : 'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" class="img"  style="width: 100%; height: 100%;"/>
-                          </el-carousel-item>
-                        </el-carousel>
+                              <div v-for="(item, index) in imgList" :key="index" style="width: 800px; height: 500px">
+                                 <img :src="item.敏感图片 ? 'http://develop.gangwaninfo.com:9999' + item.敏感图片 : 'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" class="img"  style="width: 100%; height: 100%;"/>
+                              </div>
+                              <!-- <div>111</div>
+                              <div>222</div>
+                              <div>333</div>
+                              <div>444</div> -->
+                          <!-- </el-carousel-item> -->
+                        <!-- </el-carousel> -->
                            <!-- <h4>翻页书籍</h4>
                            <div class="book">
                                <div class="prev_page">
@@ -60,6 +66,7 @@
 import PositionHorn from '../../components/Postion_Horn'
 import MyBreadcrumb from '@/components/My_Breadcrumb'
 import '@/utils/img2blob.js'
+import '@/utils/turn.js'
 export default {
   // ...img2blob,
   name: 'document_detail',
@@ -135,9 +142,10 @@ export default {
         shenqing: this.$route.query.shenpi
       }).then(data => {
         this.imgList = data
-        // this.imgList && this.imgList.forEach((item) => {
+       
+   
+        this.imgList && this.imgList.forEach((item) => {
           $(() => {
-            // let 
             // console.log($('.img').img2blob())
             // default
           
@@ -146,17 +154,33 @@ export default {
             // with watermark
             // console.log(this.userInfo['姓名'] + '' + this.userInfo['身份号'])
             $(".img").img2blob({
-                watermark: this.userInfo['姓名'] + '' + this.userInfo['身份号'],
-                fontStyle: 'Arial',
-                fontSize: '30', // px
-                fontColor: '#f00', // default 'black'
-                fontX: 100, // The x coordinate where to start painting the text
-                fontY: 50 // The y coordinate where to start painting the text
+              watermark: this.userInfo['姓名'] + '' + this.userInfo['身份号'],
+              fontStyle: 'Arial',
+              fontSize: '30', // px
+              fontColor: '#f00', // default 'black'
+              fontX: 100, // The x coordinate where to start painting the text
+                  fontY: 50 // The y coordinate where to start painting the text
+              });
             });
-          });
-        // })
-        
-      })
+            
+          })
+        }).then(() => {
+         var turnWidth = $('#cover').outerWidth(),
+              turnHeight = $('#cover').outerHeight();
+          if (!this.imgList.message) {
+            $('#loopDiv').turn({
+              width: turnWidth * 2 + 20,
+              height: turnHeight,
+              elevation: 50,
+              gradients: true,
+              autoCenter: true,
+              display: 'double',
+              when: { turning:(event, page, pageObject) => {
+                console.log(page, 'page')
+              }}
+            });
+          }
+        })
     },
     getPersonList () {
       this.$api.application.detail_person({
@@ -248,9 +272,10 @@ export default {
   }
   .con_4 {
     width: 100%;
-    margin: 0 80px;
-    position: relative;
-    background:rgba(3,94,255,0.15);
+    margin: 0 auto !important;
+    // position: relative;
+    // background:rgba(3,94,255,0.15);
+    background:#f0fccc;
     border-radius:2px;
     border:1px solid rgba(11,66,187,1);
   }
