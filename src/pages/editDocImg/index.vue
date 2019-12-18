@@ -25,24 +25,11 @@
                 </div>
                 <div>
                    <div class="right">
-                      <div class="con_4" id="loopDiv">
-                        <el-carousel indicator-position="outside" arrow="always" :autoplay="false">
-                          <el-carousel-item v-for="(item, index) in imgList" :key="index">
-                              <!-- <img :src="'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" style="width: 100%; height: 100%;"  v-editImg="{text: userInfo['用户名'] + '' + nowDate,textColor:'rgba(225, 225, 225, 1)'}" /> -->
-                              <canvas style="width:100%;height:100%" ref="canvas" class="canvas" @mousedown="mouseDown(index,$event)" @mouseup="mouseUp(index,$event)"></canvas>
-                          </el-carousel-item>
-                        </el-carousel>
-                           <!-- <h4>翻页书籍</h4>
-                           <div class="book">
-                               <div class="prev_page">
-                                   <img src="../../assets/images/book.png" alt="">
-                               </div>
-                               <div class="next_page">
-                                   <img src="../../assets/images/book.png" alt="">
-                               </div>
-                           </div>
-                           <button class="prev-btn">上翻</button>
-                           <button class="next-btn">下翻</button> -->
+                       <div class="con_4" id="loopDiv" style="width:800px;height:500px;">
+                        <div v-for="(item, index) in imgList" :key="index" style="width: 800px; height:500px">
+                              <canvas style="width:400px;height:500px" ref="canvas" class="canvas" @mousedown="mouseDown(index,$event)" @mouseup="mouseUp(index,$event)"></canvas>
+                              <!-- <img :src="item.敏感图片 ? 'http://develop.gangwaninfo.com:9999' + item.敏感图片 : 'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" class="img"  style="width: 100%; height: 100%;"/> -->
+                        </div>
                        </div>
                        <div class="opt_btn">
                             <button class="printf">打印</button>
@@ -156,25 +143,9 @@ export default {
       formData.append('uuid', this.dataUUID)
       formData.append('tupianuuid',this.imgList[this.index].UUID)
       formData.append('name',this.imgList[this.index].图像名称)
-
-//  shenqing: this.$route.query.shenpi,
-//         uuid: this.dataUUID,
-//         image: this.canvas[this.index].toDataURL("image/jpg"),
-//         tupianuuid: this.imgList[this.index].UUID,
-//         name: this.imgList[this.index].图像名称
-
       this.$api.application.docImg(formData).then(data => {
-                          console.log(data)
-                  })
-
-      // this.$api.application.docImg({
-      //   shenqing: this.$route.query.shenpi,
-      //   uuid: this.dataUUID,
-      //   image: this.canvas[this.index].toDataURL("image/jpg"),
-      //   tupianuuid: this.imgList[this.index].UUID
-      // }).then((data) => {
-      //   console.log(data)
-      // })
+          console.log(data)
+      })
     },
     resetClickStatus () {
       this.isMasic = false
@@ -190,7 +161,6 @@ export default {
       a.click()
     },
      mosaic () {
-      //  console.log(1111)
         let self = this
         this.resetClickStatus()
         this.isMasic = true
@@ -255,28 +225,46 @@ export default {
     // },
     handleNodeClick (data) {
       this.dataUUID = data.UUID
-      this.$api.build.imageList({
-        uuid: data.UUID
-      }).then(data => {
-        this.imgList = data
-        this.$nextTick(function () {
-            this.$data.imgList.forEach((item, index) => {
-                let imgContent = this.$refs.canvas
-                this.canvas = imgContent
-                this.context[index] =imgContent[index].getContext('2d')
-                let Img = new Image()
-                Img.style.width="860px"
-                Img.style.height="300px"
-                // Img.crossOrigin = 'anonymous'
-                this.image = Img
-                Img.src = 'http://develop.gangwaninfo.com:9999' + item.原始图像路径
-                // console.log(this.redirectUrl(item.原始图像路径))
-                Img.onload = () => {
-                  this.context[index].drawImage(Img, 0, 0)
-                }
-            })
-        })
-      })
+      if (data.父代码 !== '根') {
+        this.$api.build.imageList({
+          uuid: data.UUID
+        }).then(data => {
+           this.imgList = !data.message ? data : []
+          this.$nextTick(function () {
+              this.$data.imgList.forEach((item, index) => {
+                  let imgContent = this.$refs.canvas
+                  this.canvas = imgContent
+                  this.context[index] =imgContent[index].getContext('2d')
+                  let Img = new Image()
+                  Img.style.width="400px"
+                  Img.style.height="500px"
+                  // Img.crossOrigin = 'anonymous'
+                  this.image = Img
+                  Img.src = 'http://develop.gangwaninfo.com:9999' + item.原始图像路径
+                  // console.log(this.redirectUrl(item.原始图像路径))
+                  Img.onload = () => {
+                    this.context[index].drawImage(Img, 0, 0, 400, 500)
+                  }
+              })
+          })
+        }).then(() => {
+            if (this.imgList) {
+                var turnWidth = $('#cover').outerWidth(),
+                    turnHeight = $('#cover').outerHeight();
+                $('#loopDiv').turn({
+                  width: turnWidth * 2 + 20,
+                  height: turnHeight,
+                  elevation: 50,
+                  gradients: true,
+                  autoCenter: true,
+                  display: 'double',
+                  when: { turning:(event, page, pageObject) => {
+                    console.log(page, 'page')
+                  }}
+                });
+              }
+          })
+      }
     },
     editDocImg () {
       
@@ -387,8 +375,10 @@ export default {
       line-height: 40px;
   }
   .con_4 {
-    width: 100%;
-    margin: 0 80px;
+    // width: 100%;
+    width: 800px;
+    height: 500px;
+    margin: 0 auto !important;
     position: relative;
     background:rgba(3,94,255,0.15);
     border-radius:2px;

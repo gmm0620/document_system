@@ -38,7 +38,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
             '  Tip: built files are meant to be served over an HTTP server.\n' +
             '  Opening index.html over file:// won\'t work.\n'
         ))
-        client.scp('C:\\Users\\Lenovo\\Desktop\\documentSystem\\dist', {
+        client.scp('C:\\Users\\Lenovo\\Desktop\\document_system\\dist', {
             host: '101.37.149.85',
             username: 'gangwan',
             password: 'gangwan#123',

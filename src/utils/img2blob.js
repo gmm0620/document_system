@@ -17,18 +17,22 @@ $.fn.img2blob = function (a) {
 	} else {
 		a = b
 	}
-	
+	console.log($(this))
     $(this).each((i, c) => {
 		// console.log(a)
-        var d = $(this).attr('src'),
+        var d = $(this).eq(i).attr('src'),
             e = '.' + $(this).attr('class'),
 			f = new Image()
+			// f.width = 400
+			// f.height = 500 
 		f.onload = () => {
             var g = document.createElement('canvas')
-            g.width = f.naturalWidth
-            g.height = f.naturalHeight
+            g.width = 400
+            g.height = 500
+            // g.width = f.naturalWidth
+            // g.height = f.naturalHeight
 			var h = g.getContext('2d')
-			h.drawImage(f, 0, 0)
+			h.drawImage(f, 0, 0, 400, 500)
 			console.log(a)
 			if (a.watermark !== '') {
 				h.font = a.fontSize + 'px ' + a.fontStyle
@@ -39,12 +43,12 @@ $.fn.img2blob = function (a) {
             var j = g.toDataURL('image/png'),
                 k = DataUriToBinary(j),
                 l = new Blob([k], {
-                    type: 'image/png'
-	   })
-		 m = window.URL.createObjectURL(l);
-		console.log($(e), '342536347')
-		$(e).eq(i).attr('src', m);
-		console.log(22222222)
+					type: 'image/png'
+				})
+				console.log(j, '2453')
+			let m = window.URL.createObjectURL(l);
+			console.log($(e), '342536347')
+			$(e).eq(i).attr('src', m);
 		};
 			f.src = d
     })

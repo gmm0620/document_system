@@ -26,29 +26,9 @@
                 <div>
                    <div class="right">
                       <div class="con_4" id="loopDiv" style="width:800px;height:500px;">
-                        <!-- <el-carousel indicator-position="outside" arrow="always" :autoplay="false">
-                          <el-carousel-item v-for="(item, index) in imgList" :key="index"> -->
-                              <!-- <img :src="'http://develop.gangwaninfo.com:9999' + item.敏感图片" alt="" style="width: 100%; height: 100%;"  v-watermark="{text: userInfo['用户名'] + '' + nowDate,textColor:'rgba(225, 225, 225, 1)'}" /> -->
-                              <div v-for="(item, index) in imgList" :key="index" style="width: 800px; height: 500px">
-                                 <img :src="item.敏感图片 ? 'http://develop.gangwaninfo.com:9999' + item.敏感图片 : 'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" class="img"  style="width: 100%; height: 100%;"/>
-                              </div>
-                              <!-- <div>111</div>
-                              <div>222</div>
-                              <div>333</div>
-                              <div>444</div> -->
-                          <!-- </el-carousel-item> -->
-                        <!-- </el-carousel> -->
-                           <!-- <h4>翻页书籍</h4>
-                           <div class="book">
-                               <div class="prev_page">
-                                   <img src="../../assets/images/book.png" alt="">
-                               </div>
-                               <div class="next_page">
-                                   <img src="../../assets/images/book.png" alt="">
-                               </div>
-                           </div>
-                           <button class="prev-btn">上翻</button>
-                           <button class="next-btn">下翻</button> -->
+                          <div v-for="(item, index) in imgList" :key="index" style="width: 800px; height: 500px">
+                              <img :src="item.敏感图片 ? 'http://develop.gangwaninfo.com:9999' + item.敏感图片 : 'http://develop.gangwaninfo.com:9999' + item.原始图像路径" alt="" class="img"  style="width: 100%; height: 100%;"/>
+                          </div>
                        </div>
                        <div class="opt_btn">
                            <button class="printf">打印</button>
@@ -137,50 +117,40 @@ export default {
         this.$router.back()
     },
     handleNodeClick (data) {
-      this.$api.application.getDocImg({
-        uuid: data.UUID,
-        shenqing: this.$route.query.shenpi
-      }).then(data => {
-        this.imgList = data
-       
-   
-        this.imgList && this.imgList.forEach((item) => {
+      if (data.父代码 !== '根') {
+        this.$api.application.getDocImg({
+          uuid: data.UUID,
+          shenqing: this.$route.query.shenpi
+        }).then(data => {
+          this.imgList = !data.message ? data : []
           $(() => {
-            // console.log($('.img').img2blob())
-            // default
-          
-            // $(".img").img2blob();
-            
-            // with watermark
-            // console.log(this.userInfo['姓名'] + '' + this.userInfo['身份号'])
-            $(".img").img2blob({
-              watermark: this.userInfo['姓名'] + '' + this.userInfo['身份号'],
-              fontStyle: 'Arial',
-              fontSize: '30', // px
-              fontColor: '#f00', // default 'black'
-              fontX: 100, // The x coordinate where to start painting the text
-                  fontY: 50 // The y coordinate where to start painting the text
+              $(".img").img2blob({
+                watermark: this.userInfo['姓名'] + '' + this.userInfo['身份号'],
+                fontStyle: 'Arial',
+                fontSize: '30', // px
+                fontColor: '#f00', // default 'black'
+                fontX: 100, // The x coordinate where to start painting the text
+                fontY: 50 // The y coordinate where to start painting the text
+                });
               });
-            });
-            
-          })
         }).then(() => {
-         var turnWidth = $('#cover').outerWidth(),
-              turnHeight = $('#cover').outerHeight();
-          if (!this.imgList.message) {
-            $('#loopDiv').turn({
-              width: turnWidth * 2 + 20,
-              height: turnHeight,
-              elevation: 50,
-              gradients: true,
-              autoCenter: true,
-              display: 'double',
-              when: { turning:(event, page, pageObject) => {
-                console.log(page, 'page')
-              }}
-            });
-          }
-        })
+            if (this.imgList) {
+              var turnWidth = $('#cover').outerWidth(),
+                  turnHeight = $('#cover').outerHeight();
+              $('#loopDiv').turn({
+                width: turnWidth * 2 + 20,
+                height: turnHeight,
+                elevation: 50,
+                gradients: true,
+                autoCenter: true,
+                display: 'double',
+                when: { turning:(event, page, pageObject) => {
+                  console.log(page, 'page')
+                }}
+              });
+            }
+         })
+      }
     },
     getPersonList () {
       this.$api.application.detail_person({
