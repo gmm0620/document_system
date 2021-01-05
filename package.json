@@ -11,7 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "cropperjs": "^1.5.6",
     "echarts": "^4.4.0",
     "el-tree-transfer": "^2.2.1",
